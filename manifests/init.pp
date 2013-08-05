@@ -22,9 +22,9 @@
 #
 # [*mailman*]             - (boolean)
 #
-# [*maincf_source*]       - (string)
+# [*maincf_source*]       - (string) The value handed to puppet's 'source' parameter for main.cf 
 #
-# [*mastercf_source*]     - (string)
+# [*mastercf_source*]     - (string) The value handed to puppet's 'source' parameter for master.cf
 #
 # [*master_smtp*]         - (string)
 #
@@ -44,10 +44,11 @@
 #
 # [*root_mail_recipient*] - (string)
 #
-# [*satellite*]           - (boolean) Whether to use as a satellite
+# [*satellite*]           - (boolean) Whether to configure postfix as a satellite
 #                           (implies MTA)
 #
-# [*smtp_listen*]         - (string) The SMTP listen interface
+# [*smtp_listen*]         - (string) The SMTP listen interface. This updates master.cf.
+#   Postfix accepts  'all','loopback-only', and ip addresses
 #
 # [*use_amavisd*]         - (boolean) Whether to setup for Amavis
 #
