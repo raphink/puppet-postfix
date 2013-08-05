@@ -24,6 +24,8 @@
 #
 # [*maincf_source*]       - (string)
 #
+# [*manage_conffiles*]    - (boolean) Whether config files are to be replaced
+#
 # [*mastercf_source*]     - (string)
 #
 # [*master_smtp*]         - (string)
