@@ -7,12 +7,19 @@
 # service type  private unpriv  chroot  wakeup  maxproc command + args
 #               (yes)   (yes)   (yes)   (never) (100)
 # ==========================================================================
-<% if @smtp_listen == 'all' -%>
-smtp      inet  n       -       n       -       -       smtpd
+<% if @master_smtp -%>
+<%= @master_smtp %>
+<% elsif @smtp_listen == 'all' -%>
+smtp      inet  n       -       -       -       -       smtpd
 <% else -%>
-<%= @smtp_listen %>:smtp      inet  n       -       n       -       -       smtpd
+<%= @smtp_listen %>:smtp      inet  n       -       -       -       -       smtpd
 <% end -%>
-#smtp      inet  n       -       n       -       -       smtpd
+<% if @master_submission -%>
+<%= @master_submission %>
+<% end -%>
+<% if @master_smtps -%>
+<%= @master_smtps %>
+<% end -%>
 #submission inet n       -       n       -       -       smtpd
 #  -o smtpd_enforce_tls=yes
 #  -o smtpd_sasl_auth_enable=yes
@@ -61,7 +68,7 @@ scache	  unix	-	-	n	-	1	scache
 # Also specify in main.cf: maildrop_destination_recipient_limit=1
 #
 maildrop  unix  -       n       n       -       -       pipe
-  flags=DRhu user=vmail argv=/usr/local/bin/maildrop -d ${recipient}
+  flags=DRhu user=<%= @mail_user %> argv=/usr/local/bin/maildrop -d ${recipient}
 #
 # The Cyrus deliver program has changed incompatibly, multiple times.
 #
